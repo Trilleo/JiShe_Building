@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5822137602478998646}
   - component: {fileID: 5291109986856275973}
   - component: {fileID: 5868983069203822701}
-  - component: {fileID: 4577294617112242686}
+  - component: {fileID: 2260304243028816187}
   m_Layer: 6
   m_Name: ItemSquare
   m_TagString: Untagged
@@ -106,7 +106,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4577294617112242686
+--- !u!114 &2260304243028816187
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
