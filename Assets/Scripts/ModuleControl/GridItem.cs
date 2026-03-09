@@ -6,17 +6,23 @@ public class GridItem : MonoBehaviour
     public string itemName;
     [Tooltip("Include (0,0) for the pivot, and relative coordinates for children, e.g., (1,0)")]
     public List<Vector2Int> localCells = new List<Vector2Int> { new Vector2Int(0, 0) };
-    
+
     [HideInInspector] public Vector3 spawnPosition;
     [HideInInspector] public Quaternion spawnRotation;
     [HideInInspector] public int currentRotationStep = 0;
     [HideInInspector] public Vector2Int currentGridPosition;
     [HideInInspector] public bool isInModule = false;
 
+    private float defaultZ;
+    // Adjust this value based on your camera and layering needs. 
+    // Negative usually brings it closer to the camera in standard 2D setups.
+    private const float DRAG_Z_OFFSET = -1f; 
+
     void Start()
     {
         spawnPosition = transform.position;
         spawnRotation = transform.rotation;
+        defaultZ = transform.position.z;
     }
 
     public List<Vector2Int> GetCurrentShape()
@@ -26,7 +32,7 @@ public class GridItem : MonoBehaviour
         {
             int x = cell.x;
             int y = cell.y;
-            
+
             for (int i = 0; i < currentRotationStep; i++)
             {
                 int temp = x;
@@ -42,5 +48,19 @@ public class GridItem : MonoBehaviour
     {
         currentRotationStep = (currentRotationStep + 1) % 4;
         transform.Rotate(0, 0, -90f);
+    }
+    
+    public void OnBeginDrag()
+    {
+        Vector3 pos = transform.position;
+        pos.z = defaultZ + DRAG_Z_OFFSET;
+        transform.position = pos;
+    }
+    
+    public void OnEndDrag()
+    {
+        Vector3 pos = transform.position;
+        pos.z = defaultZ;
+        transform.position = pos;
     }
 }
