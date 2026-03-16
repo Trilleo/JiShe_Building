@@ -66,7 +66,7 @@ public class DragController : MonoBehaviour
                 wasInModuleBeforeDrag = draggedItem.isInModule;
 
                 inventoryGrid.RemoveItem(draggedItem);
-                draggedItem.transform.SetAsLastSibling();
+                draggedItem.RectTransform.SetAsLastSibling();
                 CreateGhost();
                 break;
             }
@@ -112,7 +112,7 @@ public class DragController : MonoBehaviour
 
     void CreateGhost()
     {
-        ghostObject = Instantiate(draggedItem.gameObject, draggedItem.transform.parent);
+        ghostObject = Instantiate(draggedItem.gameObject, draggedItem.RectTransform.parent);
         Destroy(ghostObject.GetComponent<GridItem>());
 
         // Disable raycasting on all ghost images so they don't intercept input
@@ -167,7 +167,7 @@ public class DragController : MonoBehaviour
         float duration = 0.25f;
 
         item.currentRotationStep = 0;
-        Quaternion targetRot = Quaternion.identity;
+        Quaternion targetRot = item.spawnRotation;
 
         while (time < duration)
         {

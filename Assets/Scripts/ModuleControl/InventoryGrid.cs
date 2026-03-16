@@ -177,7 +177,11 @@ public class InventoryGrid : MonoBehaviour
     /// <param name="newCellSize">New cell size in pixels.</param>
     public void SetSlotSize(float newCellSize)
     {
-        if (newCellSize <= 0f) return;
+        if (newCellSize <= 0f)
+        {
+            Debug.LogWarning("SetSlotSize: newCellSize must be greater than 0.");
+            return;
+        }
 
         cellSize = newCellSize;
 

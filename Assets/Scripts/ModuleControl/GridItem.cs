@@ -10,6 +10,7 @@ public class GridItem : MonoBehaviour
     public List<Vector2Int> localCells = new List<Vector2Int> { new Vector2Int(0, 0) };
 
     [HideInInspector] public Vector2 spawnPosition;
+    [HideInInspector] public Quaternion spawnRotation;
     [HideInInspector] public int currentRotationStep = 0;
     [HideInInspector] public Vector2Int currentGridPosition;
     [HideInInspector] public bool isInModule = false;
@@ -26,6 +27,7 @@ public class GridItem : MonoBehaviour
     void Start()
     {
         spawnPosition = rectTransform.anchoredPosition;
+        spawnRotation = rectTransform.localRotation;
     }
 
     public RectTransform RectTransform
