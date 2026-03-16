@@ -52,8 +52,13 @@ public class SerializableDictionary<TValue>
 
     public SerializableDictionary(Dictionary<string, TValue> dict)
     {
-        keys = new List<string>(dict.Keys);
-        values = new List<TValue>(dict.Values);
+        keys = new List<string>();
+        values = new List<TValue>();
+        foreach (var pair in dict)
+        {
+            keys.Add(pair.Key);
+            values.Add(pair.Value);
+        }
     }
 
     /// <summary>
@@ -62,6 +67,13 @@ public class SerializableDictionary<TValue>
     public Dictionary<string, TValue> ToDictionary()
     {
         var dict = new Dictionary<string, TValue>();
+
+        if (keys.Count != values.Count)
+        {
+            UnityEngine.Debug.LogWarning(
+                $"[SerializableDictionary] Key count ({keys.Count}) does not match value count ({values.Count}). Data may be corrupted.");
+        }
+
         int count = Math.Min(keys.Count, values.Count);
         for (int i = 0; i < count; i++)
             dict[keys[i]] = values[i];

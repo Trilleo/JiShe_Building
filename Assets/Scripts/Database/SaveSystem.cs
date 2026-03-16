@@ -110,14 +110,15 @@ public static class SaveSystem
     }
 
     /// <summary>
-    /// Delete all .json save files in the root save directory (non-recursive).
+    /// Delete all .json save files in the save directory.
+    /// Searches recursively so files in subdirectories are also deleted.
     /// </summary>
     public static void DeleteAll()
     {
         if (!Directory.Exists(RootPath))
             return;
 
-        string[] files = Directory.GetFiles(RootPath, "*.json");
+        string[] files = Directory.GetFiles(RootPath, "*.json", SearchOption.AllDirectories);
         foreach (string file in files)
             File.Delete(file);
 
