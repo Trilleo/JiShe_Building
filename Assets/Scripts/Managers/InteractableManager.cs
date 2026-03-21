@@ -64,7 +64,6 @@ public class InteractableManager : MonoBehaviour
                 shop.SetActive(true);
                 break;
             case InteractableType.Module:
-                movemanager.enabled = true;
                 module.SetActive(true);
                 break;
             case InteractableType.Quest:
